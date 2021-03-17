@@ -47,7 +47,7 @@ public class SeleniumTest {
         driver.get("http://localhost:9999");
         WebElement form = driver.findElement(By.cssSelector("[data-test-id]"));
         form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванова Даша");
-        form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+7945786548");
+        form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79164789568");
         form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         form.findElement(By.cssSelector("[data-test-id=submit]")).click();
         String text = driver.findElement(By.className("alert-success")).getText();
