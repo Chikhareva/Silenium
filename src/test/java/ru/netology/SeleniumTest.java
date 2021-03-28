@@ -26,13 +26,12 @@ public class SeleniumTest {
 
     @BeforeEach
     void setUp() {
-        driver = new ChromeDriver();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
+        driver = new ChromeDriver(options);
     }
-
 
     @AfterEach
     void tearDown() {
@@ -43,13 +42,13 @@ public class SeleniumTest {
     @Test
     void shouldSubmitRequest() throws InterruptedException {
         driver.get("http://localhost:9999");
-        WebElement form = driver.findElement(By.cssSelector("[data-test-id]"));
-        form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванова Даша");
-        form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79164789568");
-        form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
-        form.findElement(By.cssSelector("[data-test-id=submit]")).click();
-        String text = driver.findElement(By.className("alert-success")).getText();
-        assertEquals("Ваша заявка успешно отправлена!", text.trim());
+        WebElement findElement = driver.findElement(By.cssSelector("[data-test-id]"));
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванова Даша");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79164789568");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        String text = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText();
+        assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
     }
 }
 
